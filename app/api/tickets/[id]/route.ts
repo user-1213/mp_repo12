@@ -3,10 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 // This would connect to actual database
 const mockTickets: any[] = [];
 
-export async function PATCH(request: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const body = await request.json();
-    const { id } = params;
+    const { id } = await params;
 
     // Find and update ticket
     const ticket = mockTickets.find((t) => t._id === id);
