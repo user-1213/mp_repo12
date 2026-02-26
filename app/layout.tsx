@@ -1,21 +1,23 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from '@/components/theme-provider'
+import { Toaster } from 'sonner'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  userScalable: false,
+}
+
 export const metadata: Metadata = {
   title: 'IT Support Platform',
   description: 'Professional IT Support Ticketing System with AI-Powered Intelligence',
   generator: 'v0.app',
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    userScalable: false,
-  },
   icons: {
     icon: [
       {
@@ -45,6 +47,7 @@ export default function RootLayout({
       <body className="font-sans antialiased dark bg-background text-foreground">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           {children}
+          <Toaster />
           <Analytics />
         </ThemeProvider>
       </body>
